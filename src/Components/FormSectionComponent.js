@@ -6,14 +6,13 @@ class FormSectionComponent extends Component {
     super(props);
   }
   render() {
-    let { groupName, fieldNames, hasButtons, AddItem, itemList, modifyItem } =
-      this.props;
+    let { groupName, AddItem, itemList, modifyItem } = this.props;
 
     return (
       <fieldset className="FormSectionComponent">
         <legend>
           {groupName}{" "}
-          {hasButtons ? (
+          {itemList ? (
             <button type="button" onClick={(e) => AddItem()}>
               +Add
             </button>
@@ -22,8 +21,8 @@ class FormSectionComponent extends Component {
           )}
         </legend>
         {
-          itemList ? (
-            fieldNames.map((item) => {
+          !itemList ? (
+            ["name", "email", "phone", "address"].map((item) => {
               return (
                 <div key={uniqid()}>
                   <label>{item}</label>
@@ -49,15 +48,15 @@ class FormSectionComponent extends Component {
           //     });
           //   })}
         }
-        {fieldNames.map((item) => {
+        {/* {fieldNames.map((item) => {
           return (
             <div key={uniqid()}>
               <label>{item}</label>
               <input type="text" name={item} id={item} />
             </div>
           );
-        })}
-        {hasButtons ? <button type="button">Delete item</button> : ""}
+        })} */}
+        {itemList ? <button type="button">Delete item</button> : ""}
       </fieldset>
     );
   }
