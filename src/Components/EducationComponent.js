@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import uniqid from "uniqid";
 
 class EducationComponent extends Component {
   constructor(props) {
@@ -9,7 +8,7 @@ class EducationComponent extends Component {
     let { legend, schoolList, handlerFunctions } = this.props;
 
     return (
-      <fieldset>
+      <fieldset className="educationComponent">
         <legend>
           {legend}{" "}
           <button
@@ -23,33 +22,37 @@ class EducationComponent extends Component {
         </legend>
         {schoolList.map((item) => {
           return (
-            <div key={item.id}>
-              <label>School</label>
-              <input
-                type="text"
-                value={item.name}
-                onChange={(e) => {
-                  handlerFunctions.EditInfo(
-                    "name",
-                    e.target.value,
-                    "school",
-                    item.id
-                  );
-                }}
-              />
-              <label>Finish Date</label>
-              <input
-                type="text"
-                value={item.finishDate}
-                onChange={(e) => {
-                  handlerFunctions.EditInfo(
-                    "finishDate",
-                    e.target.value,
-                    "school",
-                    item.id
-                  );
-                }}
-              />
+            <div key={item.id} className="entityInputData">
+              <div className="inputField">
+                <label>School</label>
+                <input
+                  type="text"
+                  value={item.name}
+                  onChange={(e) => {
+                    handlerFunctions.EditInfo(
+                      "name",
+                      e.target.value,
+                      "school",
+                      item.id
+                    );
+                  }}
+                />
+              </div>
+              <div className="inputField">
+                <label>Finish Date</label>
+                <input
+                  type="text"
+                  value={item.finishDate}
+                  onChange={(e) => {
+                    handlerFunctions.EditInfo(
+                      "finishDate",
+                      e.target.value,
+                      "school",
+                      item.id
+                    );
+                  }}
+                />
+              </div>
               <button
                 onClick={(e) => {
                   e.preventDefault();

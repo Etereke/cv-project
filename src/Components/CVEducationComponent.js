@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import uniqid from "uniqid";
 
 class CVEducationComponent extends Component {
   constructor(props) {
@@ -13,8 +12,9 @@ class CVEducationComponent extends Component {
         <h1>{sectionName}</h1>
         {schoolList.map((item) => {
           return (
-            <div key={uniqid()}>
-              {item.name}, finished in {item.finishDate}
+            <div key={item.id}>
+              {item.name ? item.name : "School name"}, finished in{" "}
+              {item.finishDate ? item.finishDate : "finish date"}
             </div>
           );
         })}

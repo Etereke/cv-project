@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import GeneralInfoComponent from "./GeneralInfoComponent";
 import EducationComponent from "./EducationComponent";
 import WorkExperienceComponent from "./WorkExperienceComponent";
-
 class FormComponent extends Component {
   constructor(props) {
     super(props);

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import uniqid from "uniqid";
 
 class GeneralInfoComponent extends Component {
   constructor(props) {
@@ -9,9 +8,9 @@ class GeneralInfoComponent extends Component {
     let { legend, generalInfo, handlerFunctions } = this.props;
 
     return (
-      <fieldset>
+      <fieldset className="generalInfo">
         <legend>{legend}</legend>
-        <div>
+        <div className="inputField">
           <label>name</label>
           <input
             type="text"
@@ -21,7 +20,7 @@ class GeneralInfoComponent extends Component {
             }}
           />
         </div>
-        <div>
+        <div className="inputField">
           <label>email</label>
           <input
             type="text"
@@ -31,7 +30,7 @@ class GeneralInfoComponent extends Component {
             }}
           />
         </div>
-        <div>
+        <div className="inputField">
           <label>phone</label>
           <input
             type="text"
@@ -41,7 +40,7 @@ class GeneralInfoComponent extends Component {
             }}
           />
         </div>
-        <div>
+        <div className="inputField">
           <label>address</label>
           <input
             type="text"

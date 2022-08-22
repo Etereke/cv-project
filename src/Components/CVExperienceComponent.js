@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import uniqid from "uniqid";
 
 class CVExperienceComponent extends Component {
   constructor(props) {
@@ -13,8 +12,11 @@ class CVExperienceComponent extends Component {
         <h1>{sectionName}</h1>
         {companyList.map((item) => {
           return (
-            <div key={uniqid()}>
-              {item.name}, {item.city} - {item.position}, {item.duration}{" "}
+            <div key={item.id}>
+              {item.name ? item.name : "Company name"},{" "}
+              {item.city ? item.city : "City name"} -{" "}
+              {item.position ? item.position : "Position"},{" "}
+              {item.duration ? item.duration : "duration"} years
             </div>
           );
         })}
