@@ -7,6 +7,7 @@ class CVEducationComponent extends Component {
 
   render() {
     let { sectionName, schoolList } = this.props;
+
     return (
       <div className="CVEducationComponent">
         <h1>{sectionName}</h1>

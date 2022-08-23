@@ -1,128 +1,104 @@
 import "./App.css";
-import React, { Component } from "react";
+import React, { useState } from "react";
 import CVComponent from "./Components/CVComponent";
 import FormComponent from "./Components/FormComponent";
 import { GeneralInfo, School, Company } from "./Data classes/classes.js";
 
-class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      displayMode: false,
-      generalInfo: new GeneralInfo("", "", "", ""),
-      schoolList: [],
-      companyList: [],
-    };
-    this.toggleDisplayMode = this.toggleDisplayMode.bind(this);
-    this.Add = this.Add.bind(this);
-    this.EditInfo = this.EditInfo.bind(this);
-    this.Delete = this.Delete.bind(this);
-  }
-  toggleDisplayMode(value) {
-    this.setState({
-      displayMode: value,
-    });
-  }
+const App = (props) => {
+  const [displayMode, setDisplayMode] = useState(false);
+  const [generalInfo, setGeneralInfo] = useState(
+    new GeneralInfo("", "", "", "")
+  );
+  const [schoolList, setSchoolList] = useState([]);
+  const [companyList, setCompanyList] = useState([]);
 
-  Add(type) {
+  let toggleDisplayMode = (value) => {
+    setDisplayMode(value);
+  };
+
+  let Add = (type) => {
     switch (type) {
       case "school":
-        this.setState({
-          schoolList: this.state.schoolList.concat(new School("", "")),
-        });
+        setSchoolList(schoolList.concat(new School("", "")));
         break;
       case "company":
-        this.setState({
-          companyList: this.state.companyList.concat(
-            new Company("", "", "", "")
-          ),
-        });
+        setCompanyList(companyList.concat(new Company("", "", "", "")));
         break;
       default:
     }
-  }
+  };
 
-  EditInfo(name, value, type, id) {
+  let EditInfo = (name, value, type, id) => {
+    console.log(`${name}, ${value}, ${type}, ${id}`);
     switch (type) {
       case "school":
-        const tempSchools = this.state.schoolList;
+        const tempSchools = schoolList;
         tempSchools.find((item) => {
           return item.id === id;
         })[name] = value;
-        this.setState({
-          schoolList: tempSchools,
-        });
+        setSchoolList(tempSchools);
         break;
       case "company":
-        const tempCompanies = this.state.companyList;
+        const tempCompanies = companyList;
         tempCompanies.find((item) => {
           return item.id === id;
         })[name] = value;
-        this.setState({
-          companyList: tempCompanies,
-        });
+        setCompanyList(tempCompanies);
         break;
       case "general":
-        let tempInfo = this.state.generalInfo;
+        let tempInfo = generalInfo;
+        console.log(generalInfo);
         tempInfo[name] = value;
-        this.setState({
-          generalInfo: tempInfo,
-        });
+        setGeneralInfo(tempInfo);
         break;
       default:
     }
-  }
+    console.log(generalInfo);
+  };
 
-  Delete(id, type) {
+  let Delete = (id, type) => {
     switch (type) {
       case "school":
-        const tempSchools = this.state.schoolList.filter((item) => {
+        const tempSchools = schoolList.filter((item) => {
           return item.id !== id;
         });
-        this.setState({
-          schoolList: tempSchools,
-        });
+        setSchoolList(tempSchools);
         break;
       case "company":
-        const tempCompanies = this.state.companyList.filter((item) => {
+        const tempCompanies = companyList.filter((item) => {
           return item.id !== id;
         });
-        this.setState({
-          companyList: tempCompanies,
-        });
+        setCompanyList(tempCompanies);
         break;
       default:
     }
-  }
+  };
 
-  render() {
-    let { displayMode, generalInfo, schoolList, companyList } = this.state;
-    let handlerFunctions = {
-      Add: this.Add,
-      EditInfo: this.EditInfo,
-      Delete: this.Delete,
-    };
-    return (
-      <div className="App">
-        {displayMode ? (
-          <CVComponent
-            toggleDisplayMode={this.toggleDisplayMode}
-            generalInfo={generalInfo}
-            schoolList={schoolList}
-            companyList={companyList}
-          />
-        ) : (
-          <FormComponent
-            toggleDisplayMode={this.toggleDisplayMode}
-            handlerFunctions={handlerFunctions}
-            generalInfo={generalInfo}
-            schoolList={schoolList}
-            companyList={companyList}
-          />
-        )}
-      </div>
-    );
-  }
-}
+  let handlerFunctions = {
+    Add: Add,
+    EditInfo: EditInfo,
+    Delete: Delete,
+  };
+  return (
+    <div className="App">
+      {displayMode ? (
+        <CVComponent
+          toggleDisplayMode={toggleDisplayMode}
+          generalInfo={generalInfo}
+          schoolList={schoolList}
+          companyList={companyList}
+        />
+      ) : (
+        <FormComponent
+          toggleDisplayMode={toggleDisplayMode}
+          handlerFunctions={handlerFunctions}
+          generalInfo={generalInfo}
+          schoolList={schoolList}
+          companyList={companyList}
+        />
+      )}
+    </div>
+  );
+};
 
 export default App;
