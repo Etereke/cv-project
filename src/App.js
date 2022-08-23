@@ -4,7 +4,7 @@ import CVComponent from "./Components/CVComponent";
 import FormComponent from "./Components/FormComponent";
 import { GeneralInfo, School, Company } from "./Data classes/classes.js";
 
-const App = (props) => {
+const App = () => {
   const [displayMode, setDisplayMode] = useState(false);
   const [generalInfo, setGeneralInfo] = useState(
     new GeneralInfo("", "", "", "")
@@ -29,17 +29,16 @@ const App = (props) => {
   };
 
   let EditInfo = (name, value, type, id) => {
-    console.log(`${name}, ${value}, ${type}, ${id}`);
     switch (type) {
       case "school":
-        const tempSchools = schoolList;
+        const tempSchools = [...schoolList];
         tempSchools.find((item) => {
           return item.id === id;
         })[name] = value;
         setSchoolList(tempSchools);
         break;
       case "company":
-        const tempCompanies = companyList;
+        const tempCompanies = [...companyList];
         tempCompanies.find((item) => {
           return item.id === id;
         })[name] = value;
@@ -47,13 +46,18 @@ const App = (props) => {
         break;
       case "general":
         let tempInfo = generalInfo;
-        console.log(generalInfo);
         tempInfo[name] = value;
-        setGeneralInfo(tempInfo);
+        setGeneralInfo(
+          new GeneralInfo(
+            tempInfo.name,
+            tempInfo.email,
+            tempInfo.phone,
+            tempInfo.address
+          )
+        );
         break;
       default:
     }
-    console.log(generalInfo);
   };
 
   let Delete = (id, type) => {

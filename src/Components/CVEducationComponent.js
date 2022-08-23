@@ -1,27 +1,21 @@
-import React, { Component } from "react";
+import React from "react";
 
-class CVEducationComponent extends Component {
-  constructor(props) {
-    super(props);
-  }
+const CVEducationComponent = (props) => {
+  let { sectionName, schoolList } = props;
 
-  render() {
-    let { sectionName, schoolList } = this.props;
-
-    return (
-      <div className="CVEducationComponent">
-        <h1>{sectionName}</h1>
-        {schoolList.map((item) => {
-          return (
-            <div key={item.id}>
-              {item.name ? item.name : "School name"}, finished in{" "}
-              {item.finishDate ? item.finishDate : "finish date"}
-            </div>
-          );
-        })}
-      </div>
-    );
-  }
-}
+  return (
+    <div className="CVEducationComponent">
+      <h1>{sectionName}</h1>
+      {schoolList.map((item) => {
+        return (
+          <div key={item.id}>
+            {item.name ? item.name : "School name"}, finished in{" "}
+            {item.finishDate ? item.finishDate : "finish date"}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
 
 export default CVEducationComponent;

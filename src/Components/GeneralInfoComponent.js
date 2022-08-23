@@ -32,7 +32,6 @@ const GeneralInfoComponent = (props) => {
           type="text"
           value={generalInfo.phone}
           onChange={(e) => {
-            console.log(e.target.value);
             handlerFunctions.EditInfo("phone", e.target.value, "general");
           }}
         />
